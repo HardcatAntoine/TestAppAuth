@@ -1,5 +1,6 @@
 package com.example.mytest.aeon.data.remote
 
+import com.example.mytest.aeon.data.model.TokenResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -11,7 +12,7 @@ interface ApiService {
         @Header("app-key") apiKey: String,
         @Header("v") v: String,
         @Body body: HashMap<String, String>
-    ): String?
+    ): TokenResponse
 
     @GET("/payments")
     suspend fun getPaymentsList(

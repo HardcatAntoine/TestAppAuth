@@ -1,6 +1,7 @@
 package com.example.mytest.aeon.data.repo
 
 import com.example.mytest.aeon.data.local.Preferences
+import com.example.mytest.aeon.data.model.TokenResponse
 import com.example.mytest.aeon.data.remote.ApiService
 import com.example.mytest.aeon.utils.APP_KEY
 import com.example.mytest.aeon.utils.V_KEY
@@ -12,7 +13,7 @@ class LoginRepository @Inject constructor(
 ) {
     suspend fun getToken(
         loginPassword: HashMap<String, String>
-    ): String? {
+    ): TokenResponse {
         return apiService.getToken(
             apiKey = APP_KEY,
             v = V_KEY,

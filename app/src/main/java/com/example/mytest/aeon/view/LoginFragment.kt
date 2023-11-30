@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
             } else {
                 lifecycleScope.launch {
                     val token = viewModel.getToken(login, password)
-                    if (token.toString().isNullOrEmpty()) {
+                    if (token.isNullOrEmpty()) {
                         showAlertDialog()
                     } else {
                         findNavController().navigate(R.id.action_loginFragment_to_paymentsFragment)
