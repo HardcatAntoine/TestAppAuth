@@ -2,15 +2,21 @@ package com.example.mytest.aeon.data.remote
 
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface ApiService {
-    @POST("/login")
-    suspend fun auth(@Body body: HashMap<String, String>): String?
+    @POST("login")
+    suspend fun getToken(
+        @Header("app-key") apiKey: String,
+        @Header("v") v: String,
+        @Body body: HashMap<String, String>
+    ): String?
 
     @GET("/payments")
     suspend fun getPaymentsList(
-        @Query("token") token: String
+        @Header("app-key") apiKey: String,
+        @Header("v") v: String,
+        @Header("token") token: String
     ): List<String>
 }

@@ -10,11 +10,15 @@ class Preferences @Inject constructor(
     private val sharedPreferences =
         context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
-    fun saveInputLogin(login: String?) {
-        sharedPreferences.edit().putString("login", login)
+    fun saveToken(login: String?) {
+        sharedPreferences.edit().putString("token", login)
     }
 
-    fun saveInputPassword(password: String?) {
-        sharedPreferences.edit().putString("password", password)
+    fun getSavedToken(): String? {
+        return sharedPreferences.getString("token", null)
+    }
+
+    fun clearPreferences() {
+        sharedPreferences.edit().remove("token")
     }
 }

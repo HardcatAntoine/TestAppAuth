@@ -9,5 +9,14 @@
         android:id="@+id/loginFragment"
         android:name="com.example.mytest.aeon.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_paymentsFragment"
+            app:destination="@id/paymentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="com.example.mytest.aeon.view.PaymentsFragment"
+        android:label="fragment_payments"
+        tools:layout="@layout/fragment_payments" />
 </navigation>
