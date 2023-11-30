@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytest.aeon.R
 import com.example.mytest.aeon.databinding.FragmentPaymentsBinding
 import com.example.mytest.aeon.viewmodel.LoginViewModel
+import com.example.mytest.aeon.viewmodel.PaymentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PaymentsFragment : Fragment() {
     lateinit var binding: FragmentPaymentsBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: PaymentsViewModel by viewModels()
+    private val adapter = PaymentsAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +30,19 @@ class PaymentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("SavedToken", "${viewModel.getSavedToken()}")
+        initAdapter()
+        viewModel.paymentsList.observe(viewLifecycleOwner) { list ->
+            adapter.setList(list)
+        }
+        binding.btnLogOut.setOnClickListener {
+            findNavController().navigateUp()
+            viewModel.removeToken()
+        }
+
+    }
+
+    private fun initAdapter() {
+        binding.rvPayments.adapter = adapter
+        binding.rvPayments.layoutManager = LinearLayoutManager(requireContext())
     }
 }

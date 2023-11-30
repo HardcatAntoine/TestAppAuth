@@ -38,4 +38,7 @@ class LoginRepository @Inject constructor(
     fun getSavedToken(): String? {
         return preferences.getSavedToken()
     }
+    fun removeToken(){
+        preferences.clearPreferences()
+    }
 }

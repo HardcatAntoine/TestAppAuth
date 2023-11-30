@@ -19,7 +19,9 @@ class PaymentsViewModel @Inject constructor(
         if (!token.isNullOrEmpty()) {
             val response = repository.getPaymentsList(token)
             _paymentsList.value = response.response
-
         }
+    }
+    fun removeToken(){
+        repository.removeToken()
     }
 }
