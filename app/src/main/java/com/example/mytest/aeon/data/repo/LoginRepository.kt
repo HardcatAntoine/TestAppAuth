@@ -1,6 +1,8 @@
 package com.example.mytest.aeon.data.repo
 
 import com.example.mytest.aeon.data.local.Preferences
+import com.example.mytest.aeon.data.model.Payments
+import com.example.mytest.aeon.data.model.PaymentsResponse
 import com.example.mytest.aeon.data.model.TokenResponse
 import com.example.mytest.aeon.data.remote.ApiService
 import com.example.mytest.aeon.utils.APP_KEY
@@ -21,7 +23,7 @@ class LoginRepository @Inject constructor(
         )
     }
 
-    suspend fun getPaymentsList(token: String): List<String> {
+    suspend fun getPaymentsList(token: String): PaymentsResponse {
         return apiService.getPaymentsList(
             apiKey = APP_KEY,
             v = V_KEY,

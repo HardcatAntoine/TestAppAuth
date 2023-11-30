@@ -21,4 +21,8 @@ class LoginViewModel @Inject constructor(
         repository.saveToken(token)
         return token
     }
+
+    fun getSavedToken(): String? {
+        return repository.getSavedToken()
+    }
 }

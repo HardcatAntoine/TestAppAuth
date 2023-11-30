@@ -29,23 +29,25 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        binding.btnSignIn.setOnClickListener {
-            val login = binding.login.text.toString()
-            val password = binding.password.text.toString()
-            if (login.isNullOrEmpty() || password.isNullOrEmpty()) {
-                showAlertDialog()
-            } else {
-                lifecycleScope.launch {
-                    val token = viewModel.getToken(login, password)
-                    if (token.isNullOrEmpty()) {
-                        showAlertDialog()
-                    } else {
-                        findNavController().navigate(R.id.action_loginFragment_to_paymentsFragment)
+        if (viewModel.getSavedToken().isNullOrEmpty()) {
+            binding.btnSignIn.setOnClickListener {
+                val login = binding.login.text.toString()
+                val password = binding.password.text.toString()
+                if (login.isNullOrEmpty() || password.isNullOrEmpty()) {
+                    showAlertDialog()
+                } else {
+                    lifecycleScope.launch {
+                        val token = viewModel.getToken(login, password)
+                        if (token.isNullOrEmpty()) {
+                            showAlertDialog()
+                        } else {
+                            findNavController().navigate(R.id.action_loginFragment_to_paymentsFragment)
+                        }
                     }
                 }
             }
+        } else {
+            findNavController().navigate(R.id.action_loginFragment_to_paymentsFragment)
         }
     }
 
