@@ -7,15 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytest.aeon.R
 import com.example.mytest.aeon.databinding.FragmentPaymentsBinding
-import com.example.mytest.aeon.viewmodel.LoginViewModel
 import com.example.mytest.aeon.viewmodel.PaymentsViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PaymentsFragment : Fragment() {
@@ -33,15 +31,13 @@ class PaymentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        lifecycleScope.launch {
-            viewModel.getPaymentsList()
-        }
-        viewModel.paymentsList.observe(viewLifecycleOwner) { list ->
+        Log.d("savedToken", viewModel.getSavedToken().toString())
+        viewModel.getPaymentsList()
+        viewModel.paymentList.observe(viewLifecycleOwner) { list ->
             adapter.setList(list)
         }
         binding.btnLogOut.setOnClickListener {
-            findNavController().navigateUp()
-            viewModel.removeToken()
+            showAlertDialog()
         }
 
     }
@@ -49,5 +45,19 @@ class PaymentsFragment : Fragment() {
     private fun initAdapter() {
         binding.rvPayments.adapter = adapter
         binding.rvPayments.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun showAlertDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Log out")
+            .setMessage("Are you sure?")
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.cancel()
+            }
+            .setPositiveButton("Yes") { dialog, _ ->
+                viewModel.removeToken()
+                findNavController().navigate(R.id.action_paymentsFragment_to_loginFragment)
+            }
+            .show()
     }
 }

@@ -11,7 +11,7 @@ class Preferences @Inject constructor(
         context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
     fun saveToken(token: String?) {
-        sharedPreferences.edit().putString(TOKEN, token)
+        sharedPreferences.edit().putString(TOKEN, token).apply()
     }
 
     fun getSavedToken(): String? {
@@ -19,9 +19,10 @@ class Preferences @Inject constructor(
     }
 
     fun clearPreferences() {
-        sharedPreferences.edit().remove(TOKEN)
+        sharedPreferences.edit().remove(TOKEN).apply()
     }
-    companion object{
+
+    companion object {
         const val TOKEN = "token"
     }
 }

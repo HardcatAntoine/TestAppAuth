@@ -1,7 +1,6 @@
 package com.example.mytest.aeon.data.repo
 
 import com.example.mytest.aeon.data.local.Preferences
-import com.example.mytest.aeon.data.model.Payments
 import com.example.mytest.aeon.data.model.PaymentsResponse
 import com.example.mytest.aeon.data.model.TokenResponse
 import com.example.mytest.aeon.data.remote.ApiService

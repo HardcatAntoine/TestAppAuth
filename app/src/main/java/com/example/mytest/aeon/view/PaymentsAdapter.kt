@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.mytest.aeon.R
-import com.example.mytest.aeon.data.model.Payments
+import com.example.mytest.aeon.data.model.Payment
 
 class PaymentsAdapter : Adapter<PaymentsViewHolder>() {
-    private var list: List<Payments> = listOf()
+    private var list: List<Payment> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentsViewHolder {
         val holder = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_payments, parent, false)
@@ -23,7 +23,7 @@ class PaymentsAdapter : Adapter<PaymentsViewHolder>() {
         holder.bind(item)
     }
 
-    fun setList(list: List<Payments>) {
+    fun setList(list: List<Payment>) {
         this.list = list
     }
 }

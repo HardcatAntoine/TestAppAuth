@@ -19,6 +19,8 @@ class LoginViewModel @Inject constructor(
         val response = repository.getToken(mapForToken)
         val token = response.response.token
         repository.saveToken(token)
+        Log.d("INPUT TOKEN", token)
+        Log.d("SAVE TOKEN Login VM", repository.getSavedToken().toString())
         return token
     }
 

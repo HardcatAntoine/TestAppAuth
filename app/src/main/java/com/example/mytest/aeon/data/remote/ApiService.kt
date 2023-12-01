@@ -15,7 +15,7 @@ interface ApiService {
         @Body body: HashMap<String, String>
     ): TokenResponse
 
-    @GET("/payments")
+    @GET("payments")
     suspend fun getPaymentsList(
         @Header("app-key") apiKey: String,
         @Header("v") v: String,
