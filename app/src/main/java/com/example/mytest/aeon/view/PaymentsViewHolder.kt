@@ -18,9 +18,19 @@ class PaymentsViewHolder(itemView: View) : ViewHolder(itemView) {
 
 
     fun bind(item: Payment) {
-            id.text = item.id.toString()
-            title.text = item.title
+        id.text = item.id.toString()
+        title.text = item.title
+        if (item.amount == null || item.amount.toString() == "") {
+            amountText.visibility = View.GONE
+            amount.visibility = View.GONE
+        } else {
             amount.text = item.amount.toString()
+        }
+        if (item.created == null || item.created.toString() == "") {
+            createdText.visibility = View.GONE
+            created.visibility = View.GONE
+        } else {
             created.text = item.created.toString()
+        }
     }
 }
