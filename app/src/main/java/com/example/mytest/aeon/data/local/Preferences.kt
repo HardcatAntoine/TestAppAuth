@@ -1,6 +1,7 @@
 package com.example.mytest.aeon.data.local
 
 import android.content.Context
+import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class Preferences @Inject constructor(
         context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
     fun saveToken(token: String?) {
-        sharedPreferences.edit().putString(TOKEN, token).apply()
+        sharedPreferences.edit { putString(TOKEN, token) }
     }
 
     fun getSavedToken(): String? {
@@ -19,7 +20,7 @@ class Preferences @Inject constructor(
     }
 
     fun clearPreferences() {
-        sharedPreferences.edit().remove(TOKEN).apply()
+        sharedPreferences.edit { remove(TOKEN) }
     }
 
     companion object {
