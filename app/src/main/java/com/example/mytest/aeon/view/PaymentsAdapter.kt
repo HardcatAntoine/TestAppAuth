@@ -25,5 +25,7 @@ class PaymentsAdapter : Adapter<PaymentsViewHolder>() {
 
     fun setList(list: List<Payment>) {
         this.list = list
+        notifyDataSetChanged()
     }
+
 }

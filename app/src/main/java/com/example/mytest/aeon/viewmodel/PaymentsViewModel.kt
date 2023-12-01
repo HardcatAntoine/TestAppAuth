@@ -1,5 +1,6 @@
 package com.example.mytest.aeon.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,15 +24,11 @@ class PaymentsViewModel @Inject constructor(
         if (!token.isNullOrEmpty()) {
             viewModelScope.launch {
                 val response = repository.getPaymentsList(token)
-                _paymentList.value = response.payment
+                _paymentList.value = response.response
+                Log.d("Payments", _paymentList.value.toString())
             }
         }
     }
-
-    fun getSavedToken(): String? {
-        return repository.getSavedToken()
-    }
-
     fun removeToken() {
         repository.removeToken()
     }

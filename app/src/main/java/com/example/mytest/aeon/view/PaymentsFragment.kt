@@ -31,7 +31,6 @@ class PaymentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        Log.d("savedToken", viewModel.getSavedToken().toString())
         viewModel.getPaymentsList()
         viewModel.paymentList.observe(viewLifecycleOwner) { list ->
             adapter.setList(list)
